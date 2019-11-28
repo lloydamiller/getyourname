@@ -7,7 +7,7 @@ from keys import email_login
 def send_alert_by_email(recipient, subject, message):
     sender = email_login["user"]
     msg = MIMEMultipart()
-    msg["From"] = email_login["user"]
+    msg["From"] = "Twitter Alert"
     msg["To"] = recipient
     msg["Subject"] = subject
 
@@ -23,4 +23,4 @@ def send_alert_by_email(recipient, subject, message):
         server.close()
         print(f"[*] Sent alert to {recipient}")
     except:
-        print(f"[!] Error sending alert to  {recipient}")
+        print(f"[!] Error sending alert to {recipient}")

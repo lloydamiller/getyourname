@@ -9,8 +9,10 @@ In run.py, set recipient to the email address you want to receive alerts.
 Create the file keys.py with the following two objects:
 ```bash
 twitter_creds = {
-    "API_KEY": "",
-    "API_KEY_SECRET": ""
+    "TWITTER_CONSUMER_KEY": '',
+    "TWITTER_CONSUMER_SECRET": '',
+    "TWITTER_ACCESS_KEY": '',
+    "TWITTER_ACCESS_SECRET": ''
 }
 
 email_login = {

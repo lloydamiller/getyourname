@@ -1,14 +1,9 @@
-#######################
-import twitters
+from twitters import Twitter
 from alert import send_alert_by_email
 import time
 
 accounts_file_name = "accounts.txt"
-recipient = "lloydamiller@me.com" # email address where you want
-
-"""
-FILE I/O
-"""
+recipient = "lloydamiller@me.com"  # email address where you want
 
 
 def open_accounts_file():
@@ -29,30 +24,40 @@ def save_accounts_file(d):
 
 if __name__ == "__main__":
     print("WELCOME TO THE TWITTER ACCOUNT LISTENER")
-    print("Please connect to an active Twitter account for using API")
-    api = twitters.twitter_account_login()
+
+    try:
+        api = Twitter()
+    except:
+        print("[!] Failed to connect to Twitter, quitting...")
+        quit()
+
     current_accounts_to_check = open_accounts_file()
+
     if len(current_accounts_to_check) == 0:
         print("[*] Please add at least one account name")
         account = input("[?] Username: ")
         current_accounts_to_check.append(account)
     while True:
         print(f"[*] Current Accounts Tracked:")
-        for tracked_account in current_accounts_to_check:
-            print(f"    0{current_accounts_to_check.index(tracked_account)+1}. @{tracked_account}")
+        if len(current_accounts_to_check) > 0:
+            for tracked_account in current_accounts_to_check:
+                print(f"    0{current_accounts_to_check.index(tracked_account)+1}. @{tracked_account}")
 
-        print("""
-[*] Options: 
-    (a)dd an account to track
-    (d)elete a tracked account
-    (b)egin tracking""")
+        print("[*] Options: ")
+        print("    (a)dd an account to track")
+        print("    (d)elete a tracked account")
+        print("    (b)egin tracking")
         selection = input("[?] What would you like to do? ").lower()
 
-        if selection not in ['a','d','b']:
+        if selection not in ['a', 'd', 'b']:
             continue
 
         elif selection == 'b':
-            break
+            if len(current_accounts_to_check) == 0:
+                print("[*] Please add at least one account name")
+                continue
+            else:
+                break
 
         elif selection == 'a':
             print("[*] Enter the user name (not including @) of the account you want to track")
@@ -80,12 +85,12 @@ if __name__ == "__main__":
             print(f"    0{current_accounts_to_check.index(tracked_account)+1}. @{tracked_account}")
 
         for account in current_accounts_to_check:
-            test = twitters.check_if_account_is_active(api, account)
+            test = api.check_if_account_is_active(account)
             if test is False:
                 print(f"[!] Account {account} could be available!")
                 print(f"    Sending email to {recipient} now...")
-                email_subject = f"ALERT: @{account} Could Be Available Now"
-                email_body = "Go to https://twitter.com/signup and register it now!"
+                email_subject = f"ALERT: @{account} Could Be Available!"
+                email_body = "Go to https://twitter.com/signup and register."
                 send_alert_by_email(recipient, email_subject, email_body)
                 current_accounts_to_check.remove(account)
             time.sleep(5)
