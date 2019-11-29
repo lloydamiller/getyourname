@@ -9,7 +9,7 @@ def open_accounts_file():
     with open(accounts_file_name, 'r+') as f:
         t = f.read()
         if len(t) == 0:
-            print("[!] This bot is not listening for any accounts, please add one to contunue")
+            print("[!] This bot is not listening for any accounts, please add one to continue")
             return []
         else:
             return t.split(",")
