@@ -1,11 +1,11 @@
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from keys import email_login
+from creds import email_login
 
 
 def send_alert_by_email(recipient, subject, message):
-    sender = email_login["user"]
+    sender = email_login["USER"]
     msg = MIMEMultipart()
     msg["From"] = "Twitter Alert"
     msg["To"] = recipient
@@ -18,7 +18,7 @@ def send_alert_by_email(recipient, subject, message):
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.ehlo()
         server.starttls()
-        server.login(email_login["user"], email_login["pass"])
+        server.login(email_login["USER"], email_login["PASS"])
         server.sendmail(sender, recipient, text)
         server.close()
         print(f"[*] Sent alert to {recipient}")

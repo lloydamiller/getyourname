@@ -3,7 +3,6 @@ from alert import send_alert_by_email
 import time
 
 accounts_file_name = "accounts.txt"
-recipient = "lloydamiller@me.com"  # email address where you want
 
 
 def open_accounts_file():
@@ -30,6 +29,9 @@ if __name__ == "__main__":
     except:
         print("[!] Failed to connect to Twitter, quitting...")
         quit()
+
+    recipient = input("[?] Enter email address to send alerts to: ")
+    print(f"[*] Will send alerts to {recipient}")
 
     current_accounts_to_check = open_accounts_file()
 

@@ -1,5 +1,5 @@
 import tweepy
-from keys import twitter_creds as keys
+from creds import twitter_creds as keys
 from datetime import datetime, timedelta
 import time
 
