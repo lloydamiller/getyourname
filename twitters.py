@@ -1,12 +1,15 @@
 import tweepy
-from creds import twitter_creds as keys
 from datetime import datetime, timedelta
 import time
+import json
 
 
 class Twitter:
 
     def __init__(self):
+
+        with open("credentials.json", 'r') as f:
+            keys = json.load(f)["twitter_creds"]
 
         twitter_api = keys["TWITTER_CONSUMER_KEY"]
         twitter_api_secret = keys["TWITTER_CONSUMER_SECRET"]

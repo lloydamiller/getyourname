@@ -6,18 +6,19 @@ Set Up:
 
 In run.py, set recipient to the email address you want to receive alerts.
 
-Create the file creds.py with the following two objects:
+Create the file credentials.json with the following two template:
 ```bash
-twitter_creds = {
+{
+  "twitter_creds": {
     "TWITTER_CONSUMER_KEY": "",
     "TWITTER_CONSUMER_SECRET": "",
     "TWITTER_ACCESS_KEY": "",
     "TWITTER_ACCESS_SECRET": ""
-}
-
-email_login = {
-    "USER": "",
-    "PASS": ""
+  },
+  "email_login": {
+    "user": "",
+    "pass": ""
+  }
 }
 
 ```
